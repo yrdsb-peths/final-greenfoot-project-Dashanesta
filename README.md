@@ -1,6 +1,6 @@
-# Final Greenfoot Project
+# Biker Mania
 This is the README.md file.
 
 Consider using **Markdown** syntax to format the text in this file. [Markdown basics](https://www.markdownguide.org/getting-started/)
-
-
+Ideas:
+- Top down racer with biker avoiding obstacles
