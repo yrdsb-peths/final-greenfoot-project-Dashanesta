@@ -10,6 +10,6 @@ public class Crate extends Actor
 {
     public void act()
     {
-
+        // add collision detection
     }
 }
