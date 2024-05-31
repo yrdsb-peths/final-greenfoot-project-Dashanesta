@@ -8,9 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-    public int scrollSpeed = 5;
+    private int gameSpeed = 5;
     private int loops = 0;
-    double distance = 0;
+    private double speedCurve = 0;
+    private int crateCooldown = 0;
+    private double distance = 0;
     Label distanceLabel;
     public MyWorld()
     {    
@@ -35,23 +37,29 @@ public class MyWorld extends World
         loops++;
         // Scroll background, code partially sourced from user danpost (https://www.greenfoot.org/topics/56895/0)
         GreenfootImage background = new GreenfootImage(getBackground());
-        getBackground().drawImage(background, 0, scrollSpeed);
-        getBackground().drawImage(background, 0, scrollSpeed-getHeight());
+        getBackground().drawImage(background, 0, gameSpeed);
+        getBackground().drawImage(background, 0, gameSpeed-getHeight());
         for (Object obj : getObjects(Crate.class))
         {
             Actor actor = (Actor)obj;
-            actor.setLocation(actor.getX(), actor.getY() + scrollSpeed);
+            actor.setLocation(actor.getX(), actor.getY() + gameSpeed);
         }
-        
+        // exponential speed increase
+        speedCurve = Math.pow(loops, 2) % Math.pow(10, 6);
+        crateCooldown = (int) (250.0 / (gameSpeed));
         // Check time passed to spawn a new crate
-        // TEMPORARY 1 SECOND STATIC COOLDOWN
-        if(loops % 100 == 0)
+        if(loops % crateCooldown == 0)
         {
             spawnCrate();
         }
         
+        if(speedCurve == 0)
+        {
+            gameSpeed++;
+        }
+        
         // Calculate distance in km and draw to distance label
-        distance = (loops/50 * scrollSpeed) / 1000.0;
+        distance = (loops/50 * gameSpeed) / 1000.0;
         distanceLabel.setValue(Math.floor(distance*100)/100 + "km");
     }
     /**
