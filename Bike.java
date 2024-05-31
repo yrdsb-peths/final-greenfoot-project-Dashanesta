@@ -8,10 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Bike extends Actor
 {
-    GreenfootImage bicycle = new GreenfootImage("images/bicycle/tile016.png");
+    GreenfootImage bicycle = new GreenfootImage("images/bicycle/bike1.png");
     public Bike()
     {
-        bicycle.scale(90, 90);
+        bicycle.scale(60, 96);
         setImage(bicycle);
     }
     
@@ -25,6 +25,12 @@ public class Bike extends Actor
         else if (Greenfoot.isKeyDown("d"))
         {
             move(4);
+        }
+        
+        // temp game over
+        if(isTouching(Crate.class))
+        {
+            Greenfoot.stop();
         }
     }
 }
