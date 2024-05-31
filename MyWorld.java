@@ -9,8 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyWorld extends World
 {
     public int scrollSpeed = 5;
-    private SimpleTimer cooldown = new SimpleTimer();
-    private SimpleTimer timeElapsed = new SimpleTimer();
+    private int loops = 0;
     double distance = 0;
     Label distanceLabel;
     public MyWorld()
@@ -27,12 +26,13 @@ public class MyWorld extends World
         distanceLabel = new Label ("0.00km", 40);
         addObject(distanceLabel, 100, 50);
         
-        timeElapsed.mark();
         spawnCrate();
     }
     
     public void act()
     {
+        // loop counter
+        loops++;
         // Scroll background, code partially sourced from user danpost (https://www.greenfoot.org/topics/56895/0)
         GreenfootImage background = new GreenfootImage(getBackground());
         getBackground().drawImage(background, 0, scrollSpeed);
@@ -45,13 +45,13 @@ public class MyWorld extends World
         
         // Check time passed to spawn a new crate
         // TEMPORARY 1 SECOND STATIC COOLDOWN
-        if(cooldown.millisElapsed() > 1000)
+        if(loops % 100 == 0)
         {
             spawnCrate();
         }
         
         // Calculate distance in km and draw to distance label
-        distance = (timeElapsed.millisElapsed()/1000 * scrollSpeed) / 1000.0;
+        distance = (loops/50 * scrollSpeed) / 1000.0;
         distanceLabel.setValue(Math.floor(distance*100)/100 + "km");
     }
     /**
@@ -59,7 +59,6 @@ public class MyWorld extends World
      */
     public void spawnCrate()
     {
-        cooldown.mark();
         Crate crate = new Crate();
         int location = Greenfoot.getRandomNumber(5);
         int[] lanes = {50,150,250,350,450,550};
