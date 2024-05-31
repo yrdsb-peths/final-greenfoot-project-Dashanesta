@@ -68,7 +68,7 @@ public class MyWorld extends World
     public void spawnCrate()
     {
         Crate crate = new Crate();
-        int location = Greenfoot.getRandomNumber(5);
+        int location = Greenfoot.getRandomNumber(6);
         int[] lanes = {50,150,250,350,450,550};
         addObject(crate, lanes[location], -32);
     }
