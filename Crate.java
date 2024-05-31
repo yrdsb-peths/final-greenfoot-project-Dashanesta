@@ -16,9 +16,8 @@ public class Crate extends Actor
         
         // Remove crate when it hits the bottom of the screen
         MyWorld world = (MyWorld) getWorld();
-        if (getY() >= world.getHeight() - 32)
+        if (getY() >= world.getHeight() + 32)
         {
-            world.spawnCrate();
             world.removeObject(this);
         }
     }
