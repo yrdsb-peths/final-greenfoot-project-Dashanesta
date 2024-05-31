@@ -8,8 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Crate extends Actor
 {
+    GreenfootImage crate = new GreenfootImage("images/crate.png");
     public void act()
     {
-        // add collision detection
+        crate.scale(64, 64);
+        setImage(crate);
     }
 }

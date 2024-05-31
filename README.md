@@ -6,4 +6,5 @@ Ideas:
 - Top down racer with biker avoiding obstacles
 
 Sources:
-- Bicycle Assets from [OpenGameArt}(https://opengameart.org/content/bicycle/)
+- Bicycle Assets from [OpenGameArt](https://opengameart.org/content/bicycle/)
+- Crate sprite from [OpenGameArt](https://opengameart.org/content/2d-wooden-box/)

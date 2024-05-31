@@ -9,7 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Bike extends Actor
 {
     GreenfootImage bicycle = new GreenfootImage("images/bicycle/tile016.png");
-    
     public Bike()
     {
         bicycle.scale(90, 90);

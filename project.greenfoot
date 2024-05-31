@@ -1,14 +1,18 @@
 #Greenfoot project file
+class.Crate.image=crate.png
 class.MyWorld.image=roadBackground.png
 dependency1.from=MyWorld
 dependency1.to=Bike
 dependency1.type=UsesDependency
-editor.fx.0.height=705
-editor.fx.0.width=816
-editor.fx.0.x=1057
-editor.fx.0.y=125
+dependency2.from=MyWorld
+dependency2.to=Crate
+dependency2.type=UsesDependency
+editor.fx.0.height=1096
+editor.fx.0.width=1936
+editor.fx.0.x=-8
+editor.fx.0.y=-8
 height=1096
-package.numDependencies=1
+package.numDependencies=2
 package.numTargets=3
 project.charset=windows-1252
 publish.hasSource=false

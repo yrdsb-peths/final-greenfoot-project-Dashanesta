@@ -18,13 +18,21 @@ public class MyWorld extends World
         // Create the bike
         Bike bike = new Bike();
         addObject(bike, 300, 750);
+        // Create the crate
+        Crate crate = new Crate();
+        addObject(crate, 300, 400);
     }
     
     public void act()
     {
-        // Scroll background
+        // Scroll background, code partially sourced from user danpost (https://www.greenfoot.org/topics/56895/0)
         GreenfootImage background = new GreenfootImage(getBackground());
         getBackground().drawImage(background, 0, scrollSpeed);
         getBackground().drawImage(background, 0, scrollSpeed-getHeight());
+        for (Object obj : getObjects(Crate.class))
+        {
+            Actor actor = (Actor)obj;
+            actor.setLocation(actor.getX(), actor.getY() + scrollSpeed);
+        }
     }
 }
