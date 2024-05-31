@@ -18,9 +18,8 @@ public class MyWorld extends World
         // Create the bike
         Bike bike = new Bike();
         addObject(bike, 300, 750);
-        // Create the crate
-        Crate crate = new Crate();
-        addObject(crate, 300, 400);
+        
+        spawnCrate();
     }
     
     public void act()
@@ -34,5 +33,15 @@ public class MyWorld extends World
             Actor actor = (Actor)obj;
             actor.setLocation(actor.getX(), actor.getY() + scrollSpeed);
         }
+    }
+    /**
+     * Spawn a crate at a random x location
+     */
+    public void spawnCrate()
+    {
+        Crate crate = new Crate();
+        int location = Greenfoot.getRandomNumber(5);
+        int[] lanes = {50,150,250,350,450,550};
+        addObject(crate, lanes[location], 0);
     }
 }
