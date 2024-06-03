@@ -113,6 +113,7 @@ public class MyWorld extends World
     }
     
     int heartX = 550;
+    int heartY = 20;
     ArrayList<Heart> hearts = new ArrayList<Heart>();
     /**
      * Add lives
@@ -123,8 +124,16 @@ public class MyWorld extends World
         {
             lives++;
             hearts.add(new Heart());
-            addObject(hearts.get(hearts.size()-1), heartX, 20);
-            heartX -= 50;
+            addObject(hearts.get(hearts.size()-1), heartX, heartY);
+            if(hearts.size() % 5 == 0)
+            {
+                heartY = 20 + (50*(hearts.size()/5));
+                heartX = 550;
+            } else
+            {   
+                heartY = 20 + (50*(hearts.size()/5));
+                heartX = 550 - (50*(hearts.size()%5));
+            }
         }
     }
     
@@ -141,6 +150,15 @@ public class MyWorld extends World
                 removeObject(hearts.get(hearts.size()-1));
                 hearts.remove(hearts.size()-1);
                 heartX += 50;
+                if(hearts.size() % 5 == 0)
+                {
+                    heartY = 20 + (50*(hearts.size()/5));
+                    heartX = 550;
+                } else
+                {
+                    heartY = 20 + (50*(hearts.size()/5));
+                    heartX = 550 - (50*(hearts.size()%5));
+                }
             }
         }
     }
