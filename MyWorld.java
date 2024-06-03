@@ -17,6 +17,7 @@ public class MyWorld extends World
     private double distance = 0;
     private int[] lanes = {50,150,250,350,450,550};
     public int lives = 0;
+    public GreenfootSound powerupSound = new GreenfootSound("sounds/powerup.mp3");
     Label distanceLabel;
     public MyWorld()
     {    

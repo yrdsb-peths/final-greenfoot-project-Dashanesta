@@ -17,6 +17,7 @@ public class LifePowerup extends Actor
         // Add life if bike touches
         if(isTouching(Bike.class))
         {
+            world.powerupSound.play();
             world.removeObject(this);
             world.addLives(1);
         }
