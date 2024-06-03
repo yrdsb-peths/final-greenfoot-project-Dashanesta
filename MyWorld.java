@@ -1,10 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
 
 /**
  * Main World
  * 
  * @author Shane DG
- * @version May 2024
+ * @version June 2024
  */
 public class MyWorld extends World
 {
@@ -13,6 +14,7 @@ public class MyWorld extends World
     private double speedCurve = 0;
     private int crateCooldown = 0;
     private double distance = 0;
+    public int lives = 0;
     Label distanceLabel;
     public MyWorld()
     {    
@@ -20,14 +22,15 @@ public class MyWorld extends World
         super(600, 900, 1, false);
         setBackground(new GreenfootImage("images/roadBackground.png"));
         // Keep labels above other objects
-        setPaintOrder(Label.class);
+        setPaintOrder(Label.class, Heart.class);
         // Create the bike
         Bike bike = new Bike();
         addObject(bike, 300, 750);
+        // Add hearts for lives
+        addLives(3);
         // Add distance label
         distanceLabel = new Label ("0.00km", 40);
-        addObject(distanceLabel, 100, 50);
-        
+        addObject(distanceLabel, 100, 20);
         spawnCrate();
     }
     
@@ -62,6 +65,7 @@ public class MyWorld extends World
         distance += (loops/50 * gameSpeed) / 1000000.0;
         distanceLabel.setValue(Math.floor(distance*100)/100 + "km");
     }
+    
     /**
      * Spawn a crate at a random x location
      */
@@ -71,5 +75,37 @@ public class MyWorld extends World
         int location = Greenfoot.getRandomNumber(6);
         int[] lanes = {50,150,250,350,450,550};
         addObject(crate, lanes[location], -32);
+    }
+    
+    int heartX = 550;
+    ArrayList<Heart> hearts = new ArrayList<Heart>();
+    /**
+     * Add lives
+     */
+    public void addLives(int iterations)
+    {
+        for(int i = 0; i < iterations; i++)
+        {
+            lives++;
+            hearts.add(new Heart());
+            addObject(hearts.get(i), heartX, 20);
+            heartX -= 50;
+        }
+    }
+    
+    /**
+     * Remove lives
+     */
+    public void removeLives(int iterations)
+    {
+        for (int i = 0; i < iterations; i++)
+        {
+            if(lives > 0)
+            {
+                lives--;
+                removeObject(hearts.get(hearts.size()-1));
+                hearts.remove(hearts.size()-1);
+            }
+        }
     }
 }

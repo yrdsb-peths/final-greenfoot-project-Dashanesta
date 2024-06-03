@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Main Player
  * 
  * @author Shane DG
- * @version May 2024
+ * @version June 2024
  */
 public class Bike extends Actor
 {
@@ -40,11 +40,6 @@ public class Bike extends Actor
         else if (Greenfoot.isKeyDown("d") && !(getX() >= 600))
         {
             move(4);
-        }
-        // temp game over
-        if(isTouching(Crate.class))
-        {
-            Greenfoot.stop();
         }
     }
 }
