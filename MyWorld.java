@@ -59,7 +59,7 @@ public class MyWorld extends World
         }
         
         // Calculate distance in km and draw to distance label
-        distance = (loops/50 * gameSpeed) / 1000.0;
+        distance += (loops/50 * gameSpeed) / 1000000.0;
         distanceLabel.setValue(Math.floor(distance*100)/100 + "km");
     }
     /**
