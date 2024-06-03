@@ -13,7 +13,9 @@ public class MyWorld extends World
     private int loops = 0;
     private double speedCurve = 0;
     private int crateCooldown = 0;
+    private int powerupCooldown = 0;
     private double distance = 0;
+    private int[] lanes = {50,150,250,350,450,550};
     public int lives = 0;
     Label distanceLabel;
     public MyWorld()
@@ -47,13 +49,30 @@ public class MyWorld extends World
             Actor actor = (Actor)obj;
             actor.setLocation(actor.getX(), actor.getY() + gameSpeed);
         }
+        for (Object obj : getObjects(LifePowerup.class))
+        {
+            Actor actor = (Actor)obj;
+            actor.setLocation(actor.getX(), actor.getY() + gameSpeed);
+        }
         // exponential speed increase
         speedCurve = Math.pow(loops, 2) % Math.pow(10, 6);
         crateCooldown = (int) (250.0 / (gameSpeed));
+        powerupCooldown = (int) (10000.0 / (gameSpeed));
         // Check time passed to spawn a new crate
         if(loops % crateCooldown == 0)
         {
             spawnCrate();
+        }
+        
+        if(loops % powerupCooldown == 0)
+        {
+            int powerupIndex = Greenfoot.getRandomNumber(1);
+            switch(powerupIndex)
+            {
+                case 0:
+                    spawnHeart();
+                    break;
+            }
         }
         
         if(speedCurve == 0)
@@ -64,6 +83,12 @@ public class MyWorld extends World
         // Calculate distance in km and draw to distance label
         distance += (loops/50 * gameSpeed) / 1000000.0;
         distanceLabel.setValue(Math.floor(distance*100)/100 + "km");
+        
+        // Temp game over
+        if(lives <= 0)
+        {
+            Greenfoot.stop();
+        }
     }
     
     /**
@@ -73,8 +98,17 @@ public class MyWorld extends World
     {
         Crate crate = new Crate();
         int location = Greenfoot.getRandomNumber(6);
-        int[] lanes = {50,150,250,350,450,550};
         addObject(crate, lanes[location], -32);
+    }
+    
+    /**
+     * Spawn a heart powerup which gives a life
+     */
+    public void spawnHeart()
+    {
+        LifePowerup life = new LifePowerup();
+        int location = Greenfoot.getRandomNumber(6);
+        addObject(life, lanes[location], -32);
     }
     
     int heartX = 550;
@@ -88,7 +122,7 @@ public class MyWorld extends World
         {
             lives++;
             hearts.add(new Heart());
-            addObject(hearts.get(i), heartX, 20);
+            addObject(hearts.get(hearts.size()-1), heartX, 20);
             heartX -= 50;
         }
     }
@@ -105,6 +139,7 @@ public class MyWorld extends World
                 lives--;
                 removeObject(hearts.get(hearts.size()-1));
                 hearts.remove(hearts.size()-1);
+                heartX += 50;
             }
         }
     }
