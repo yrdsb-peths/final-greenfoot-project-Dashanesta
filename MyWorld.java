@@ -32,7 +32,7 @@ public class MyWorld extends World
         // Add hearts for lives
         addLives(3);
         // Add distance label
-        distanceLabel = new Label ("0.00km", 40);
+        distanceLabel = new Label("0.00km", 40);
         addObject(distanceLabel, 100, 20);
         spawnCrate();
     }
