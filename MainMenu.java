@@ -46,6 +46,7 @@ public class MainMenu extends World
         // Detect enter key
         if(Greenfoot.isKeyDown("enter"))
         {
+            MyWorld.distance = 0;
             MyWorld gameWorld = new MyWorld();
             Greenfoot.setWorld(gameWorld);
         }

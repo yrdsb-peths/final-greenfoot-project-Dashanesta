@@ -14,7 +14,7 @@ public class MyWorld extends World
     private double speedCurve = 0;
     private int crateCooldown = 0;
     private int powerupCooldown = 0;
-    private double distance = 0;
+    public static double distance = 0;
     private int[] lanes = {50,150,250,350,450,550};
     public int lives = 0;
     public GreenfootSound powerupSound = new GreenfootSound("sounds/powerup.mp3");
@@ -85,10 +85,11 @@ public class MyWorld extends World
         distance += (loops/50 * gameSpeed) / 1000000.0;
         distanceLabel.setValue(Math.floor(distance*100)/100 + "km");
         
-        // Temp game over
+        // Game over
         if(lives <= 0)
         {
-            Greenfoot.stop();
+            DeathScreen deathScreen = new DeathScreen();
+            Greenfoot.setWorld(deathScreen);
         }
     }
     
