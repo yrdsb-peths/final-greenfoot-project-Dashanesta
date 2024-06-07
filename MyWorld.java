@@ -35,7 +35,6 @@ public class MyWorld extends World
         distanceLabel = new Label("0.00km", 40);
         addObject(distanceLabel, 100, 20);
         spawnCrate();
-        spawnPowerup(0);
     }
     
     public void act()
@@ -63,8 +62,7 @@ public class MyWorld extends World
         
         if(loops % powerupCooldown == 0)
         {
-            int powerupIndex = Greenfoot.getRandomNumber(2);
-            spawnPowerup(powerupIndex);
+            spawnPowerup();
         }
         
         if(speedCurve == 0)
@@ -95,10 +93,11 @@ public class MyWorld extends World
     }
     
     /**
-     * Spawn a powerup
+     * Spawn a random powerup
      */
-    public void spawnPowerup(int index)
+    public void spawnPowerup()
     {
+        int index = Greenfoot.getRandomNumber(2);
         int location = Greenfoot.getRandomNumber(6);
         switch(index)
         {
