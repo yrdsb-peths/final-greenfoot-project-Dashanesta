@@ -105,9 +105,11 @@ public class MyWorld extends World
             case 0:
                 LifePowerup life = new LifePowerup();
                 addObject(life, lanes[location], -32);
+                break;
             case 1:
                 SpeedPowerup speed = new SpeedPowerup();
                 addObject(speed, lanes[location], -32);
+                break;
         }
     }
     
