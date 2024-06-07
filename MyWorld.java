@@ -24,8 +24,8 @@ public class MyWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 900, 1, false);
         setBackground(new GreenfootImage("images/roadBackground.png"));
-        // Keep labels above other objects
-        setPaintOrder(Label.class, Heart.class);
+        // Keep GUI above moving objects
+        setPaintOrder(GUI.class, MovingClass.class);
         // Create the bike
         Bike bike = new Bike();
         addObject(bike, 300, 750);
@@ -35,6 +35,7 @@ public class MyWorld extends World
         distanceLabel = new Label("0.00km", 40);
         addObject(distanceLabel, 100, 20);
         spawnCrate();
+        spawnPowerup(0);
     }
     
     public void act()
@@ -45,12 +46,7 @@ public class MyWorld extends World
         GreenfootImage background = new GreenfootImage(getBackground());
         getBackground().drawImage(background, 0, gameSpeed);
         getBackground().drawImage(background, 0, gameSpeed-getHeight());
-        for (Object obj : getObjects(Crate.class))
-        {
-            Actor actor = (Actor)obj;
-            actor.setLocation(actor.getX(), actor.getY() + gameSpeed);
-        }
-        for (Object obj : getObjects(LifePowerup.class))
+        for (Object obj : getObjects(MovingClass.class))
         {
             Actor actor = (Actor)obj;
             actor.setLocation(actor.getX(), actor.getY() + gameSpeed);
@@ -67,13 +63,8 @@ public class MyWorld extends World
         
         if(loops % powerupCooldown == 0)
         {
-            int powerupIndex = Greenfoot.getRandomNumber(1);
-            switch(powerupIndex)
-            {
-                case 0:
-                    spawnHeart();
-                    break;
-            }
+            int powerupIndex = Greenfoot.getRandomNumber(2);
+            spawnPowerup(powerupIndex);
         }
         
         if(speedCurve == 0)
@@ -104,13 +95,20 @@ public class MyWorld extends World
     }
     
     /**
-     * Spawn a heart powerup which gives a life
+     * Spawn a powerup
      */
-    public void spawnHeart()
+    public void spawnPowerup(int index)
     {
-        LifePowerup life = new LifePowerup();
         int location = Greenfoot.getRandomNumber(6);
-        addObject(life, lanes[location], -32);
+        switch(index)
+        {
+            case 0:
+                LifePowerup life = new LifePowerup();
+                addObject(life, lanes[location], -32);
+            case 1:
+                SpeedPowerup speed = new SpeedPowerup();
+                addObject(speed, lanes[location], -32);
+        }
     }
     
     int heartX = 550;

@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Shane DG
  * @version June 2024
  */
-public class Crate extends Actor
+public class Crate extends MovingClass
 {
     GreenfootImage crate = new GreenfootImage("images/crate.png");
     GreenfootSound crateSound = new GreenfootSound("sounds/crate_break.mp3");

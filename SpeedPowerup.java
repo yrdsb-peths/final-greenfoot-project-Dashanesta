@@ -1,12 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class SpeedPowerup here.
+ * Powerup which gives increased speed and decreased crates for 15 seconds
  * 
  * @author Shane DG
  * @version June 2024
  */
-public class SpeedPowerup extends Actor
+public class SpeedPowerup extends MovingClass
 {
     GreenfootImage speed = new GreenfootImage("images/speed.png");
     public SpeedPowerup()
@@ -16,6 +16,12 @@ public class SpeedPowerup extends Actor
     
     public void act()
     {        
-        
+        MyWorld world = (MyWorld) getWorld();
+        // Activate speed if bike touches
+        if(isTouching(Bike.class))
+        {
+            world.powerupSound.play();
+            world.removeObject(this);
+        }
     }
 }

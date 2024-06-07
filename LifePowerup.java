@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Shane DG
  * @version June 2024
  */
-public class LifePowerup extends Actor
+public class LifePowerup extends MovingClass
 {
     GreenfootImage heart = new GreenfootImage("images/heart.png");
     public LifePowerup()
