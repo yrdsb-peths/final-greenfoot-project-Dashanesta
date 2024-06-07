@@ -3,17 +3,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class SpeedPowerup here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Shane DG
+ * @version June 2024
  */
 public class SpeedPowerup extends Actor
 {
-    /**
-     * Act - do whatever the SpeedPowerup wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
+    GreenfootImage speed = new GreenfootImage("images/speed.png");
+    public SpeedPowerup()
     {
-        // Add your action code here.
+        setImage(speed);
+    }
+    
+    public void act()
+    {        
+        
     }
 }

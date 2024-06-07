@@ -9,10 +9,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class LifePowerup extends Actor
 {
     GreenfootImage heart = new GreenfootImage("images/heart.png");
-    public void act()
+    public LifePowerup()
     {
         setImage(heart);
-        
+    }
+    
+    public void act()
+    {
         MyWorld world = (MyWorld) getWorld();
         // Add life if bike touches
         if(isTouching(Bike.class))
