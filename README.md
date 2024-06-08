@@ -2,7 +2,7 @@
 
 Biker Mania is a top down 2D endless runner game. The objective is to travel the furthest distance possible, without losing your lives to crates scattered along the  road!
 
-You start with 3 lives. Life powerups give you one extra life each, and dpeed powerups cause tripled speed and reduced crates for 15 seconds.
+You start with 3 lives. Life powerups give you one extra life each, and speed powerups cause tripled speed and reduced crates for 15 seconds.
 
 My current high score: 8.36km
 
