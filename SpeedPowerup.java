@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class SpeedPowerup extends MovingClass
 {
+    int loops = 0;
     GreenfootImage speed = new GreenfootImage("images/speed.png");
     public SpeedPowerup()
     {
@@ -22,6 +23,7 @@ public class SpeedPowerup extends MovingClass
         {
             world.powerupSound.play();
             world.removeObject(this);
+            world.speedBoost();
         }
     }
 }

@@ -12,6 +12,8 @@ public class MyWorld extends World
     private int gameSpeed = 5;
     private int loops = 0;
     private double speedCurve = 0;
+    private boolean speedBoost = false;
+    private int speedTimer = 900;
     private int crateCooldown = 0;
     private int powerupCooldown = 0;
     public static double distance = 0;
@@ -34,7 +36,6 @@ public class MyWorld extends World
         // Add distance label
         distanceLabel = new Label("0.00km", 40);
         addObject(distanceLabel, 100, 20);
-        spawnCrate();
     }
     
     public void act()
@@ -52,28 +53,37 @@ public class MyWorld extends World
         }
         // exponential speed increase
         speedCurve = Math.pow(loops, 2) % Math.pow(10, 6);
-        crateCooldown = (int) (250.0 / (gameSpeed));
+        // If speed boost is active, set crateCooldown to 100 loops, otherwise use formula based on speed
+        crateCooldown = speedBoost ? 100 : (int) (250.0 / (gameSpeed));
         powerupCooldown = (int) (10000.0 / (gameSpeed));
         // Check time passed to spawn a new crate
         if(loops % crateCooldown == 0)
         {
             spawnCrate();
         }
-        
-        if(loops % powerupCooldown == 0)
+        // Only spawn powerups when there is not an active speed boost
+        if(!speedBoost && loops % powerupCooldown == 0)
         {
             spawnPowerup();
         }
-        
+        // Use speed boost to increase game speed exponentially
         if(speedCurve == 0)
         {
             gameSpeed++;
         }
-        
+        // Count 900 act cycles before disabling speed boost
+        if(speedBoost)
+        {
+            speedTimer--;
+            if(speedTimer == 0)
+            {
+                gameSpeed /= 3;
+                speedBoost = false;
+            }
+        }
         // Calculate distance in km and draw to distance label
         distance += (loops/50 * gameSpeed) / 1000000.0;
         distanceLabel.setValue(Math.floor(distance*100)/100 + "km");
-        
         // Game over
         if(lives <= 0)
         {
@@ -161,5 +171,14 @@ public class MyWorld extends World
                 }
             }
         }
+    }
+    
+    /**
+     * Speed boost multiplies speed by 3 and reduces crate spawning for approx 15 seconds
+     */
+    public void speedBoost()
+    {
+        gameSpeed *= 3;
+        speedBoost = true;
     }
 }
